@@ -1,11 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
-	sum := 0
-	for i := 0; i < 10; i++ {
-		sum += i
+	fmt.Println(sqrt(2), sqrt(-4))
+}
+
+func sqrt(x float64) string {
+	if x < 0 {
+		return sqrt(-x) + "i"
 	}
-	fmt.Println(sum)
+	return fmt.Sprint(math.Sqrt(x))
 }
