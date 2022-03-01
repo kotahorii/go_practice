@@ -3,22 +3,27 @@ package main
 import "fmt"
 
 func main() {
-	pos, neg := adder(), adder()
+	fib := fibonacchi()
 	for i := 0; i < 10; i++ {
-		fmt.Println(
-			pos(i),
-			neg(-2*i),
-		)
+		fmt.Println(fib())
 	}
 }
 
-func adder() func(int) int {
-	sum := 0
-	return func(x int) int {
-		sum += x
-		return sum
+func fibonacchi() func() int {
+	a, b := 1, 0
+	return func() int {
+		a, b = b, a+b
+		return a
 	}
 }
+
+// func adder() func(int) int {
+// 	sum := 0
+// 	return func(x int) int {
+// 		sum += x
+// 		return sum
+// 	}
+// }
 
 // func printSlice(x []int) {
 // 	fmt.Printf("len=%d cap=%d %v\n", len(x), cap(x), x)
