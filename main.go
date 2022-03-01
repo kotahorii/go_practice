@@ -1,21 +1,45 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
+
+type Vertex struct {
+	X, Y float64
+}
+
+func (v Vertex) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+// type MyFloat float64
+
+// func (f MyFloat) Abs() float64 {
+// 	if f < 0 {
+// 		return float64(-f)
+// 	}
+// 	return float64(f)
+// }
+
+func (v *Vertex) Scale(f float64) {
+	v.X *= f
+	v.Y *= f
+}
 
 func main() {
-	fib := fibonacchi()
-	for i := 0; i < 10; i++ {
-		fmt.Println(fib())
-	}
+	v := Vertex{3, 4}
+	v.Scale(10)
+	fmt.Println(v.Abs())
 }
 
-func fibonacchi() func() int {
-	a, b := 1, 0
-	return func() int {
-		a, b = b, a+b
-		return a
-	}
-}
+// func fibonacchi() func() int {
+// 	a, b := 1, 0
+// 	return func() int {
+// 		a, b = b, a+b
+// 		return a
+// 	}
+// }
 
 // func adder() func(int) int {
 // 	sum := 0
