@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 type Vertex struct {
@@ -9,17 +10,20 @@ type Vertex struct {
 }
 
 func main() {
-	m := make(map[string]int)
-
-	m["Answer"] = 42
-	fmt.Println("The value:", m["Answer"])
-	delete(m, "Answer")
-	v, ok := m["Answer"]
-	fmt.Println("The value:", v, "Present?", ok)
+	hypot := func(x, y float64) float64 {
+		return math.Sqrt(x*x + y*y)
+	}
+	fmt.Println(hypot(5, 12))
+	fmt.Println(compute(hypot))
+	fmt.Println((compute(math.Pow)))
 }
 
-func printSlice(x []int) {
-	fmt.Printf("len=%d cap=%d %v\n", len(x), cap(x), x)
+// func printSlice(x []int) {
+// 	fmt.Printf("len=%d cap=%d %v\n", len(x), cap(x), x)
+// }
+
+func compute(fn func(float64, float64) float64) float64 {
+	return fn(3, 4)
 }
 
 // func sqrt(x float64) string {
