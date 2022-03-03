@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 // func do(i interface{}) {
 // 	switch v := i.(type) {
@@ -13,20 +16,22 @@ import "fmt"
 // 	}
 // }
 
-type IPAddr [4]byte
+type ErrNegativeSqrt float64
 
-func (i IPAddr) String() string {
-	return fmt.Sprintf("%v.%v.%v.%v", i[0], i[1], i[2], i[3])
+func (e ErrNegativeSqrt) Error() string {
+	return fmt.Sprintf("cannot Sqrt negative number: %v", float64(e))
+}
+
+func Sqrt(x float64) (float64, error) {
+	if x < 0 {
+		return 0, ErrNegativeSqrt(x)
+	}
+	return math.Sqrt(x), nil
 }
 
 func main() {
-	hosts := map[string]IPAddr{
-		"loopback":  {127, 0, 0, 1},
-		"googleDNS": {8, 8, 8, 8},
-	}
-	for name, ip := range hosts {
-		fmt.Printf("%v: %v\n", name, ip)
-	}
+	fmt.Println(Sqrt(2))
+	fmt.Println(Sqrt(-2))
 }
 
 // func fibonacchi() func() int {
