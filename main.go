@@ -1,14 +1,24 @@
 package main
 
-import (
-	"fmt"
+import "fmt"
 
-	"tour_of_go/animals"
+const (
+	X = iota
+	Y
+	Z
 )
 
 func main() {
-	fmt.Println(AppName())
-	fmt.Println(animals.ElephantFeed())
-	fmt.Println(animals.MonkeyFeed())
-	fmt.Println(animals.RabbitFeed())
+	f := integers()
+	fmt.Println(f())
+	fmt.Println(f())
+	fmt.Println(f())
+}
+
+func integers() func() int {
+	i := 0
+	return func() int {
+		i += 1
+		return i
+	}
 }
